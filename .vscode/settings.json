@@ -1,0 +1,9 @@
+{
+    "editor.formatOnSave": true,
+    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "-l",
+        "110"
+    ]
+}
