@@ -2,11 +2,10 @@ import typing as t
 from .base import ImageBoard
 
 
-class Danbooru(ImageBoard):
-    def __init__(self, safe_version=False):
+class Zerochan(ImageBoard):
+    def __init__(self):
         super().__init__()
-        self.BASE_URL = "https://danbooru.donmai.us"
-        self._family_friendly = safe_version
+        self.BASE_URL = "https://www.zerochan.net"
         self._mappings = {
             "id": "id",
             "title": "tag_string_character",
@@ -21,20 +20,13 @@ class Danbooru(ImageBoard):
 
     async def search(self, query_tags: t.List[str] = []) -> t.Dict[str, object]:
         params: t.Dict[str, t.Union[str, int]] = {
-            "limit": 10,
+            "s": "id&json",
         }
-        if self._family_friendly:
-            redone_tags = []
-            for tag in query_tags:
-                if "rating:" in tag:
-                    continue
-                redone_tags.append(tag)
-            redone_tags.append("rating:safe")
+
         query_tags = [tag for tag in query_tags if tag]
         if query_tags:
             params["tags"] = "+".join(query_tags)
-        print(params["tags"])
-        results, status_code = await self.request_json("get", "posts.json", params=params)
+        results, status_code = await self.request_json("get", "", params=params)
         if status_code == 200:
             parsed_data = await self.parse_json(results, self._mappings)  # noqa: E501
             results_final = {
@@ -53,8 +45,4 @@ class Danbooru(ImageBoard):
         return results_final
 
     async def random_search(self, query_tags: t.List[str] = []) -> t.Dict[str, object]:
-        query_tags = [tag.lower() for tag in query_tags]
-        if "order:random" not in query_tags:
-            query_tags.append("order:random")
-        results = await self.search(query_tags)
-        return results
+        raise NotImplementedError

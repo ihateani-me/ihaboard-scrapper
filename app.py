@@ -1,9 +1,9 @@
 from sanic import Sanic
 from sanic.response import json
-from ibapi.danbooru import Danbooru
+from imageboard.danbooru import Danbooru
 
-app = Sanic("naotimes-ib")
-app.config.FORWARDED_HOST = "poggers_in_chat"
+app = Sanic("ihaboard-scrapper")
+app.config.FORWARDED_HOST = "temporary_string"
 
 
 def to_real_bool(string):

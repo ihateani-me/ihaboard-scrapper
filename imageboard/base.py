@@ -54,7 +54,7 @@ class ImageData(dict):
 
 class ImageBoard:
     def __init__(self):
-        self._sesi = aiohttp.ClientSession(headers={"User-Agent": "naoTimesIBApi/1.0"})
+        self._sesi = aiohttp.ClientSession(headers={"User-Agent": "ihaBoard/1.0"})
         self.BASE_URL: str
 
         self._methods_maps = {
