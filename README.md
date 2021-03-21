@@ -1,3 +1,6 @@
+# Archived
+This API is merged in https://github.com/ihateani-me/ihaapi-ts
+
 # ihaboard-scrapper
 A Python API wrapper for Image board-like Booru.<br>
 This also includes a web server using Sanic.
